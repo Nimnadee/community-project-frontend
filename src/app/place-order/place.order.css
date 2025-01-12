@@ -1,0 +1,34 @@
+/* src/app/place-order/PlaceOrderPage.css */
+.grid-container {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+    padding: 1rem;
+}
+
+.card {
+    padding: 1rem;
+}
+
+.card-header {
+    padding: 0.5rem 1rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.card-header h4 {
+    font-weight: bold;
+    font-size: large;
+}
+
+.card-body {
+    overflow: visible;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+.card-image {
+    object-fit: cover;
+    border-radius: 1rem;
+}

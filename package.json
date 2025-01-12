@@ -13,9 +13,14 @@
     "@emotion/styled": "^11.14.0",
     "@mui/icons-material": "^6.3.1",
     "@mui/material": "^6.3.1",
+    "@nextui-org/card": "^2.2.9",
+    "@nextui-org/navbar": "^2.2.8",
+    "@nextui-org/react": "^2.6.11",
     "@nextui-org/system": "^2.4.6",
+    "@nextui-org/theme": "^2.4.5",
     "@toolpad/core": "^0.11.0",
     "clsx": "^2.1.1",
+    "framer-motion": "^11.17.0",
     "next": "15.1.4",
     "next-themes": "^0.4.4",
     "react": "^18.0.0",
@@ -23,7 +28,9 @@
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
+    "@types/node": "22.10.5",
     "@types/react": "^19",
-    "tailwindcss": "^3.4.1"
+    "tailwindcss": "^3.4.1",
+    "typescript": "5.7.3"
   }
 }

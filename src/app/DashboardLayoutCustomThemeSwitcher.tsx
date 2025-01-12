@@ -26,6 +26,7 @@ import ListItemText from '@mui/material/ListItemText';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import Avatar from '@mui/material/Avatar';
 import Divider from '@mui/material/Divider';
+import PlaceOrderPage from "@/app/place-order/page";
 
 const NAVIGATION: Navigation = [
     {
@@ -77,7 +78,12 @@ function DemoPageContent({ pathname }: { pathname: string }) {
                 textAlign: 'center',
             }}
         >
-            <Typography>Dashboard content for {pathname}</Typography>
+            {pathname === '/orders' ? (
+                <PlaceOrderPage />
+            ) : (
+                <Typography>Dashboard content for {pathname}</Typography>
+            )}
+
         </Box>
     );
 }
