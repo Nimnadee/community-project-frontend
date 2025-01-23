@@ -6,6 +6,7 @@ import { Providers } from "./providers";
 
 import { siteConfig } from "@/config/site";
 import { fontSans } from "@/config/fonts";
+import StepContextProvider from "@/app/context.provider";
 
 export const metadata: Metadata = {
     title: {
@@ -35,6 +36,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 fontSans.variable
             )}
         >
+        <StepContextProvider>
         <Providers themeProps={{ attribute: "class", defaultTheme: "light" }}>
             <div className="relative flex flex-col h-screen">
                 {/* Uncomment the Navbar if needed */}
@@ -56,6 +58,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 {/*</footer>*/}
             </div>
         </Providers>
+        </StepContextProvider>
         </body>
         </html>
     );

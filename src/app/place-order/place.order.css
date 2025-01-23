@@ -93,3 +93,8 @@
 .dropdown-button{
     width: 100%;
 }
+
+.error-msg{
+    color: red;
+    font-size: 12px;
+}

@@ -6,9 +6,12 @@ import "./place.order.css";
 import NavbarComponent from "./nav.bar";
 import SelectSizeDropDown from "@/app/place-order/select.size.dropdown";
 import PermanentDrawerRight from "@/app/place-order/my.basket";
+import {useMultiStepContext} from "@/app/context.provider";
+
 
 export default function PlaceOrderPage() {
     const [products, setProducts] = useState<Product[]>([]);
+    const { newOrder, setNewOrder } = useMultiStepContext();
 
     useEffect(() => {
         async function fetchProducts() {
@@ -21,7 +24,7 @@ export default function PlaceOrderPage() {
     const defaultImage = "https://images.getrecipekit.com/20220904015448-veg-20fried-20rice.png?aspect_ratio=16:9&quality=90&"; // Temporary image URL
 
     return (
-        <div >
+        <div>
             <PermanentDrawerRight />
             <div className="main-content">
                 <NavbarComponent />
@@ -42,7 +45,7 @@ export default function PlaceOrderPage() {
                                         width={270}
                                     />
                                     <h6>Price: {product.price}.00</h6>
-                                    <SelectSizeDropDown/>
+                                    <SelectSizeDropDown product={product} />
                                 </CardBody>
                             </Card>
                         ))
