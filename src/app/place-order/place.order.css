@@ -32,3 +32,64 @@
     object-fit: cover;
     border-radius: 1rem;
 }
+
+.selectSizeDropdown {
+    width: 50%;
+    padding: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+/* New styles to fix overlapping issue */
+.main-content {
+    flex-grow: 1;
+    padding: 16px;
+    margin-right: 280px; /* Adjust this value to match the drawer width */
+}
+
+.navbar {
+    margin-bottom: 16px;
+}
+.cardMain{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    margin-right:0;
+
+}
+
+.productDetails{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.cardContent{
+    width: 100%;
+}
+
+.productDetailsSubSection{
+    display: flex;
+    flex-direction: column;
+}
+
+.addRemoveDeleteBtn{
+    margin-top: 2px;
+    padding: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.productPriceAndDeleteButton{
+    display: flex;
+    flex-direction: row;
+
+}
+
+.dropdown-button{
+    width: 100%;
+}
