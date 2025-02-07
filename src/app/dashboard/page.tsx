@@ -27,14 +27,20 @@ import { getAllOrders, Order } from "@/service/order";
 import { MoreVert as MoreVertIcon} from "@mui/icons-material";
 import { getAllProducts, Product } from "@/service/product";
 import { getAllinventory, Inventory } from "@/service/inventory";
-import { PieChart, Pie, Cell, LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid, Legend, ResponsiveContainer } from "recharts";
+import { PieChart, Pie, Cell, Line, XAxis, YAxis, Tooltip, CartesianGrid, Legend, ResponsiveContainer } from "recharts";
 import { calculateProductSalesPercentage, ProductSales } from "@/service/piechart";
+import { BarChart,BarChartProps } from '@mui/x-charts/BarChart';
+import { axisClasses } from '@mui/x-charts/ChartsAxis';
+import { datasets, valueFormatter } from "./orderdata";
+import { relative } from "path";
+import { LineChart } from '@mui/x-charts/LineChart';
+// import { dataset, valueFormatter } from '../dataset/weather';
 
 
 
 const DashboardPage: React.FC = () => {
-  const [totalOrders, setTotalOrders] = useState<number>(211);
-  const [totalRevenue, setTotalRevenue] = useState<number>(20100);
+  const [totalOrders, setTotalOrders] = useState<number>(28);
+  const [totalRevenue, setTotalRevenue] = useState<number>(8450);
   const [productCount, setProductCount] = useState<number>(0);
   const [InventoryCount, setInventoryCount] = useState<number>(0);
   // const [selectedDate, setSelectedDate] = useState<Date | null>(new Date());
@@ -83,6 +89,58 @@ const DashboardPage: React.FC = () => {
   // };
 
   // const filteredData = filterData();
+  const dataset = [
+    { name: 'January', code: '19', gdp: 4 },
+    { name: 'January', code: '20', gdp: 5 },
+    { name: 'January', code: '21', gdp: 9},
+    { name: 'January', code: '22', gdp: 7},
+    { name: 'January', code: '23', gdp: 2 },
+    { name: 'January', code: '24', gdp: 0 },
+    { name: 'January', code: '25', gdp: 3 },
+    { name: 'January', code: '26', gdp: 2 },
+    { name: 'January', code: '27', gdp: 4 },
+    { name: 'January', code: '28', gdp: 2 },
+    { name: 'January', code: '29', gdp: 7 },
+    { name: 'January', code: '30', gdp: 3 },
+    { name: 'January', code: '31', gdp: 2 },
+    { name: 'February', code: '1', gdp: 9 },
+    { name:  'February', code: '2', gdp: 1 },
+    { name:  'February', code: '3', gdp: 4 },
+    { name:  'February', code: '4', gdp: 2 },
+    { name:  'February', code: '5', gdp: 2 },
+    { name:  'February', code: '6', gdp: 2 },
+    { name:  'February', code: '7', gdp: 1 },
+    
+  ];
+  
+  const chartParams: BarChartProps = {
+    yAxis: [
+      {
+        label: 'Orders',
+      },
+    ],
+    series: [
+      {
+        label: 'Orders',
+        dataKey: 'gdp',
+        valueFormatter: (v) =>
+          new Intl.NumberFormat('en-US', {
+            compactDisplay: 'short',
+            notation: 'compact',
+          }).format((v || 0) * 1),
+      },
+    ],
+    slotProps: { legend: { hidden: true } },
+    dataset,
+    width: 600,
+    height: 400,
+    sx: {
+      [`.${axisClasses.left} .${axisClasses.label}`]: {
+        transform: 'translate(-10px, 0)',
+      },
+    },
+  };
+  
    
   const [isProductListOpen, setIsProductListOpen] = useState(false);
   const [isInventoryListOpen, setIsInventoryListOpen] = useState(false);
@@ -101,7 +159,7 @@ const DashboardPage: React.FC = () => {
   const handleRevenue = (timeframe: string) => {
     switch (timeframe) {
       case "Today":
-        setTotalRevenue(20100);
+        setTotalRevenue(8450);
         break;
       case "This Week":
         setTotalRevenue(125050);
@@ -118,13 +176,13 @@ const DashboardPage: React.FC = () => {
   const handleOrders = (timeframe: string) => {
     switch (timeframe) {
       case "Today":
-        setTotalOrders(211);
+        setTotalOrders(28);
         break;
       case "This Week":
-        setTotalOrders(1340);
+        setTotalOrders(172);
         break;
       case "This Month":
-        setTotalOrders(7583);
+        setTotalOrders(201);
         break;
       default:
         setTotalOrders(211);
@@ -262,7 +320,20 @@ const DashboardPage: React.FC = () => {
   
     fetchInventory();
   }, []);
-
+  const chartSetting = {
+    yAxis: [
+      {
+        label: 'Total Orders',
+      },
+    ],
+    width: 600,
+    height: 400,
+    sx: {
+      [`.${axisClasses.left} .${axisClasses.label}`]: {
+        transform: 'translate(-10px, 0)',
+      },
+    },
+  };
   
 
   
@@ -485,6 +556,48 @@ const DashboardPage: React.FC = () => {
                </Dialog>
           </Grid>
         </Grid>
+      </Box>
+      <Box>
+        <Grid>
+        <Grid  sx={{ backgroundColor: '#f0f0f0' ,borderRadius:10, padding:1 ,left:-350,position:'relative',top:-30}}>
+           
+          <Typography sx={{color: '#00072D', margin: '40px 0', fontWeight: 'bold',fontSize:'1.3rem' }}>
+            Total Orders Per week
+          </Typography>
+        <BarChart
+          dataset={datasets}
+          xAxis={[{ scaleType: 'band', dataKey: 'month' }]}
+         series={[
+        { dataKey: 'week1', label: 'Week1', valueFormatter },
+        { dataKey: 'week2', label: 'Week2', valueFormatter },
+        { dataKey: 'week3', label: 'Week3', valueFormatter },
+        { dataKey: 'week4', label: 'Week4', valueFormatter },
+        ]}
+         {...chartSetting}
+        />
+        </Grid>
+        
+          
+          <Grid sx={{ backgroundColor: '#f0f0f0' ,borderRadius:10, padding:1 ,left:350,position:'relative', top:-560}}>
+          <Typography sx={{color: '#00072D', margin: '40px 0', fontWeight: 'bold',fontSize:'1.3rem' }}>
+            Total Orders Per Day
+          </Typography>
+          <BarChart
+              xAxis={[
+            {
+             scaleType: 'band',
+             dataKey: 'code',
+             valueFormatter: (code, context) =>
+             context.location === 'tick'
+              ? code
+              : `Date: ${dataset.find((d) => d.code === code)?.name} (${code})`,
+        },
+      ]}
+      {...chartParams}
+    />
+          </Grid>
+        </Grid>
+        
       </Box>
      
     </LocalizationProvider>
