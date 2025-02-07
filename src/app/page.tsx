@@ -2,5 +2,6 @@
 import DashboardLayoutSidebarCollapsed from './DashboardLayoutCustomThemeSwitcher';
 
 export default function Home() {
-  return <DashboardLayoutSidebarCollapsed />;
+  
+  return <DashboardLayoutSidebarCollapsed /> ;
 }

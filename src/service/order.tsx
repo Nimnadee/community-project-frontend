@@ -12,7 +12,7 @@ export interface Order {
 
 
 export async function getAllOrders(): Promise<Order[]> {
-    const url: string = "http://localhost:3000/order";
+    const url: string = "http://localhost:5000/order";
     const response: Response = await fetch(url, { cache: "no-store" });
     const orders: Order[] = await response.json();
 
@@ -31,7 +31,7 @@ export async function getAllOrders(): Promise<Order[]> {
 //     return order;
 // }
 export async function findByID(id: string): Promise<Order> {
-    const url: string = "http://localhost:3000/order/" + id;
+    const url: string = "http://localhost:5000/order/" + id;
     const response: Response = await fetch(url,{ cache: "no-store" });
     const order: Order = await response.json();
 
@@ -39,7 +39,7 @@ export async function findByID(id: string): Promise<Order> {
 }
 
 export async function saveOrder(orderRequest: Order): Promise<Order> {
-    const url: string = "http://localhost:3000/projects";
+    const url: string = "http://localhost:5000/projects";
     const request = new Request(url, {
         body: JSON.stringify(orderRequest),
         headers: {
@@ -56,7 +56,7 @@ export async function saveOrder(orderRequest: Order): Promise<Order> {
 }
 
 export async function updateOrder(updatedOrder: Order): Promise<Order> {
-    const url: string = "http://localhost:3000/order/" + updatedOrder.id;
+    const url: string = "http://localhost:5000/order/" + updatedOrder.id;
     const dto = {
         products: updatedOrder.products,
         productCounts: updatedOrder.productCounts,
@@ -79,7 +79,7 @@ export async function updateOrder(updatedOrder: Order): Promise<Order> {
 }
 
 export async function deleteOrder(id: string): Promise<Order> {
-    const url: string = "http://localhost:3000/order/" + id;
+    const url: string = "http://localhost:5000/order/" + id;
     const request = new Request(url, {
         headers: {
             "Content-Type": "application/json",
