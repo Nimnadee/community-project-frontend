@@ -343,144 +343,118 @@ const ReportManagement = () => {
   };
 
   return (
-    <div className="container mx-auto p-4">
-      {/* Order Report Section */}
-      <div className="bg-white shadow-lg rounded-lg p-6 mb-4">
-        <h2 className="text-2xl font-bold mb-4">Order Report Management</h2>
-        <div className="flex space-x-4">
-          <button
-            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-            onClick={generateOrderReport}
-            disabled={isGeneratingOrderReport}
-          >
-            {isGeneratingOrderReport ? "Generating..." : "Generate Order Report"}
-          </button>
-        </div>
-        {reports.length > 0 && (
-          <div className="mt-6">
-            <table className="min-w-full table-auto">
-              <thead>
-                <tr>
-                  <th className="px-4 py-2 border">Food</th>
-                  <th className="px-4 py-2 border">Quantity</th>
-                  <th className="px-4 py-2 border">Price</th>
-                  <th className="px-4 py-2 border">Total Price</th>
-                  {/* <th className="px-4 py-2 border">Actions</th> */}
-                </tr>
-              </thead>
-              <tbody>
-                {reports[0].foodItems.map((item, index) => (
-                  <tr key={index}>
-                    <td className="px-4 py-2 border">{item.food}</td>
-                    <td className="px-4 py-2 border">{item.quantity}</td>
-                    <td className="px-4 py-2 border">{item.price}</td>
-                    <td className="px-4 py-2 border">{item.totalPrice}</td>
-                    {/* <td className="px-4 py-2 border">
-                      <button
-                        className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
-                        onClick={printOrderReport}
-                      >
-                        Print
-                      </button>
-                    </td> */}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        )}
+    <div className="container mx-auto p-6">
+    {/* Order Report Section */}
+    <div className="bg-white shadow-xl rounded-lg p-8 mb-6">
+      {/* <h2 className="text-3xl font-semibold text-gray-800 mb-6">Order Report Management</h2> */}
+      <div className="flex justify-center mb-6">
+        <button
+          className="bg-blue-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-blue-700 transition ease-in-out duration-300 transform hover:scale-105"
+          onClick={generateOrderReport}
+          disabled={isGeneratingOrderReport}
+        >
+          {isGeneratingOrderReport ? "Generating..." : "Generate Order Report"}
+        </button>
       </div>
-
-      {/* Inventory Report Section */}
-      <div className="bg-white shadow-lg rounded-lg p-6 mb-4">
-        <h2 className="text-2xl font-bold mb-4">Inventory Report Management</h2>
-        <div className="flex space-x-4">
-          <button
-            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-            onClick={generateInventoryReport}
-            disabled={isGeneratingInventoryReport}
-          >
-            {isGeneratingInventoryReport ? "Generating..." : "Generate Inventory Report"}
-          </button>
-        </div>
-        {inventory.length > 0 && (
-          <div className="mt-6">
-            <table className="min-w-full table-auto">
-              <thead>
-                <tr>
-                  <th className="px-4 py-2 border">Item Name</th>
-                  <th className="px-4 py-2 border">Quantity</th>
-                  <th className="px-4 py-2 border">Price</th>
-                  {/* <th className="px-4 py-2 border">Actions</th> */}
+      {reports.length > 0 && (
+        <div className="mt-8 overflow-x-auto">
+          <table className="min-w-full table-auto border-collapse">
+            <thead>
+              <tr>
+                <th className="px-6 py-4 border-b text-left text-lg font-medium text-gray-600">Food</th>
+                <th className="px-6 py-4 border-b text-left text-lg font-medium text-gray-600">Quantity</th>
+                <th className="px-6 py-4 border-b text-left text-lg font-medium text-gray-600">Price</th>
+                <th className="px-6 py-4 border-b text-left text-lg font-medium text-gray-600">Total Price</th>
+              </tr>
+            </thead>
+            <tbody>
+              {reports[0].foodItems.map((item, index) => (
+                <tr key={index} className="hover:bg-gray-50">
+                  <td className="px-6 py-4 border-b text-gray-800">{item.food}</td>
+                  <td className="px-6 py-4 border-b text-gray-800">{item.quantity}</td>
+                  <td className="px-6 py-4 border-b text-gray-800">{item.price}</td>
+                  <td className="px-6 py-4 border-b text-gray-800">{item.totalPrice}</td>
                 </tr>
-              </thead>
-              <tbody>
-                {inventory.map((item, index) => (
-                  <tr key={index}>
-                    <td className="px-4 py-2 border">{item.name}</td>
-                    <td className="px-4 py-2 border">{item.quantity}</td>
-                    <td className="px-4 py-2 border">{item.price}</td>
-                    {/* <td className="px-4 py-2 border">
-                      <button
-                        className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
-                        onClick={printInventoryReport}
-                      >
-                        Print
-                      </button>
-                    </td> */}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        )}
-      </div>
-
-      {/* Expense Report Section */}
-      <div className="bg-white shadow-lg rounded-lg p-6 mb-4">
-        <h2 className="text-2xl font-bold mb-4">Expense Report Management</h2>
-        <div className="flex space-x-4">
-          <button
-            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-            onClick={generateExpenseReport}
-            disabled={isGeneratingExpenseReport}
-          >
-            {isGeneratingExpenseReport ? "Generating..." : "Generate Expense Report"}
-          </button>
+              ))}
+            </tbody>
+          </table>
         </div>
-        {expenses.length > 0 && (
-          <div className="mt-6">
-            <table className="min-w-full table-auto">
-              <thead>
-                <tr>
-                  <th className="px-4 py-2 border">Expense Name</th>
-                  <th className="px-4 py-2 border">Amount</th>
-                  <th className="px-4 py-2 border">Date</th>
-                  {/* <th className="px-4 py-2 border">Actions</th> */}
-                </tr>
-              </thead>
-              <tbody>
-                {expenses.map((item, index) => (
-                  <tr key={index}>
-                    <td className="px-4 py-2 border">{item.name}</td>
-                    <td className="px-4 py-2 border">{item.amount}</td>
-                    <td className="px-4 py-2 border">{item.date}</td>
-                    {/* <td className="px-4 py-2 border">
-                      <button
-                        className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
-                        onClick={printExpenseReport}
-                      >
-                        Print
-                      </button>
-                    </td> */}
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        )}
-      </div>
+      )}
     </div>
+  
+    {/* Inventory Report Section */}
+    <div className="bg-white shadow-xl rounded-lg p-8 mb-6">
+      {/* <h2 className="text-3xl font-semibold text-gray-800 mb-6">Inventory Report Management</h2> */}
+      <div className="flex justify-center mb-6">
+        <button
+          className="bg-green-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-green-700 transition ease-in-out duration-300 transform hover:scale-105"
+          onClick={generateInventoryReport}
+          disabled={isGeneratingInventoryReport}
+        >
+          {isGeneratingInventoryReport ? "Generating..." : "Generate Inventory Report"}
+        </button>
+      </div>
+      {inventory.length > 0 && (
+        <div className="mt-8 overflow-x-auto">
+          <table className="min-w-full table-auto border-collapse">
+            <thead>
+              <tr>
+                <th className="px-6 py-4 border-b text-left text-lg font-medium text-gray-600">Item Name</th>
+                <th className="px-6 py-4 border-b text-left text-lg font-medium text-gray-600">Quantity</th>
+                <th className="px-6 py-4 border-b text-left text-lg font-medium text-gray-600">Price</th>
+              </tr>
+            </thead>
+            <tbody>
+              {inventory.map((item, index) => (
+                <tr key={index} className="hover:bg-gray-50">
+                  <td className="px-6 py-4 border-b text-gray-800">{item.name}</td>
+                  <td className="px-6 py-4 border-b text-gray-800">{item.quantity}</td>
+                  <td className="px-6 py-4 border-b text-gray-800">{item.price}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+    </div>
+  
+    {/* Expense Report Section */}
+    <div className="bg-white shadow-xl rounded-lg p-8 mb-6">
+      {/* <h2 className="text-3xl font-semibold text-gray-800 mb-6">Expense Report Management</h2> */}
+      <div className="flex justify-center mb-6">
+        <button
+          className="bg-red-600 text-white px-6 py-3 rounded-lg shadow-md hover:bg-red-700 transition ease-in-out duration-300 transform hover:scale-105"
+          onClick={generateExpenseReport}
+          disabled={isGeneratingExpenseReport}
+        >
+          {isGeneratingExpenseReport ? "Generating..." : "Generate Expense Report"}
+        </button>
+      </div>
+      {expenses.length > 0 && (
+        <div className="mt-8 overflow-x-auto">
+          <table className="min-w-full table-auto border-collapse">
+            <thead>
+              <tr>
+                <th className="px-6 py-4 border-b text-left text-lg font-medium text-gray-600">Expense Name</th>
+                <th className="px-6 py-4 border-b text-left text-lg font-medium text-gray-600">Amount</th>
+                <th className="px-6 py-4 border-b text-left text-lg font-medium text-gray-600">Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              {expenses.map((item, index) => (
+                <tr key={index} className="hover:bg-gray-50">
+                  <td className="px-6 py-4 border-b text-gray-800">{item.name}</td>
+                  <td className="px-6 py-4 border-b text-gray-800">{item.amount}</td>
+                  <td className="px-6 py-4 border-b text-gray-800">{item.date}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+    </div>
+  </div>
+  
   );
 };
 
