@@ -19,17 +19,7 @@ export async function getAllOrders(): Promise<Order[]> {
     return orders;
 }
 
-// export async function getAllSpecificOrder(orderId: string): Promise<Order> {
-//     const url: string = `http://localhost:3000/order/${orderId}` ;
-//     const response = await fetch(url,{ cache: "no-store" });
-//     const order: Order = await response.json();
-//
-//     if (!response.ok) {
-//         throw new Error(`Failed to fetch order for orderID ${orderId}: ${response.statusText}`);
-//     }
-//
-//     return order;
-// }
+ 
 export async function findByID(id: string): Promise<Order> {
     const url: string = "http://localhost:5000/order/" + id;
     const response: Response = await fetch(url,{ cache: "no-store" });
@@ -94,17 +84,7 @@ export async function deleteOrder(id: string): Promise<Order> {
     return order;
 }
 
-// export async function findByStudentId(studentId:string): Promise<Project[]> {
-//     const url: string = "http://localhost:3000/projects/"+studentId;
-//     const response: Response = await fetch(url, { cache: "no-store" });
-//     console.log("existing projects for student, "+studentId+ ":  \n"+response);
-//
-//     const projects: Project[] = await response.json();
-//
-//     // console.log ("response(service)",projectRequests);
-//
-//     return projects;
-// }
+ 
 
 
 

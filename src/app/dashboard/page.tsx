@@ -132,7 +132,7 @@ const DashboardPage: React.FC = () => {
     ],
     slotProps: { legend: { hidden: true } },
     dataset,
-    width: 650,
+    width: 550,
     height: 300,
     sx: {
       [`.${axisClasses.left} .${axisClasses.label}`]: {
@@ -326,7 +326,7 @@ const DashboardPage: React.FC = () => {
         label: 'Total Orders',
       },
     ],
-    width: 650,
+    width: 550,
     height: 300,
     sx: {
       [`.${axisClasses.left} .${axisClasses.label}`]: {
@@ -342,7 +342,7 @@ const DashboardPage: React.FC = () => {
       <Box p={4}>
         <Grid container spacing={5} direction={{ xs: "column", sm: "row"  }} wrap="nowrap" justifyContent="space-between" alignItems="stretch">
           <Grid item xs={12} sm={6} md={4}>
-            <Card sx={{ height: "88%", minWidth: "300px" }} style={{ background: '#e5e9f0' }}>
+            <Card sx={{ height: "88%", minWidth: "280px" }} style={{ background: '#e5e9f0' }}>
               <CardContent>
                 <Box display="flex" justifyContent="space-between" alignItems="center">
                 <img 
@@ -392,7 +392,7 @@ const DashboardPage: React.FC = () => {
     },
   }}
 >
-            <Card sx={{ height: "88%", minWidth: "300px" }} style={{ background: '#e5e9f0' }}>
+            <Card sx={{ height: "88%", minWidth: "270px" }} style={{ background: '#e5e9f0' }}>
               <CardContent>
                 <Box display="flex" justifyContent="space-between" alignItems="center">
                 <img 
@@ -436,7 +436,7 @@ const DashboardPage: React.FC = () => {
 
          {/* Total Product Card */}
           <Grid item xs={12} sm={6} md={4}>
-            <Card sx={{ height: "88%",minWidth: "300px" }} style={{ background: '#e5e9f0' }}>
+            <Card sx={{ height: "88%",minWidth: "270px" }} style={{ background: '#e5e9f0' }}>
               <CardContent>
                 <Box display="flex" justifyContent="space-between" alignItems="center">
                 <img 
@@ -497,7 +497,7 @@ const DashboardPage: React.FC = () => {
 
           {/* Total Inventory Card */}
           <Grid item xs={12} sm={6} md={4}>
-            <Card sx={{ height: "88%" ,minWidth: "300px"}} style={{ background: '#e5e9f0' }}>
+            <Card sx={{ height: "88%" ,minWidth: "270px"}} style={{ background: '#e5e9f0' }}>
               <CardContent>
                 <Box display="flex" justifyContent="space-between" alignItems="center">
                 <img 
@@ -559,7 +559,7 @@ const DashboardPage: React.FC = () => {
       </Box>
       <Box>
         <Grid>
-        <Grid  sx={{ backgroundColor: '#f0f0f0' ,borderRadius:10, padding:1 ,left:100,position:'absolute',top:285 }}>
+        <Grid  sx={{ backgroundColor: '#f0f0f0' ,borderRadius:10, padding:1 ,left:-300,position:'relative',top:-25 }}>
            
           <Typography sx={{color: '#00072D', margin: '40px 0', fontWeight: 'bold',fontSize:'1.3rem' }}>
             Total Orders Per week
@@ -578,7 +578,7 @@ const DashboardPage: React.FC = () => {
         </Grid>
         
           
-          <Grid sx={{ backgroundColor: '#f0f0f0' ,borderRadius:10, padding:1 ,left:800,position:'absolute', top:290}}>
+          <Grid sx={{ backgroundColor: '#f0f0f0' ,borderRadius:10, padding:1 ,left:300,position:'relative', top:-450}}>
           <Typography sx={{color: '#00072D', margin: '40px 0', fontWeight: 'bold',fontSize:'1.3rem' }}>
             Total Orders Per Day
           </Typography>

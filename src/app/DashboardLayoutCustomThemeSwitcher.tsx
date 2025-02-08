@@ -28,6 +28,7 @@ import Avatar from '@mui/material/Avatar';
 import Divider from '@mui/material/Divider';
 import PlaceOrderPage from "@/app/place-order/page";
 import DashboardPage from './dashboard/page';
+// import OrderReportManager from './orderReport/page';
 
 
 const NAVIGATION: Navigation = [
@@ -47,10 +48,11 @@ const NAVIGATION: Navigation = [
         icon: <ShoppingCartIcon />,
     },
     {
-        segment: 'reports',
+        segment: 'orderReport',
         title: 'Reports',
         icon: <BarChartIcon />,
     },
+   
 ];
 
 const demoTheme = createTheme({
@@ -82,6 +84,7 @@ function DemoPageContent({ pathname }: { pathname: string }) {
         >   
             {pathname === '/dashboard' && <DashboardPage />}
             {pathname === '/orders' &&  <PlaceOrderPage/>}
+            {pathname === '/orderReport' &&  <OrderReportManager/>} 
 
         </Box>
     );
