@@ -174,7 +174,320 @@
 // //         )}
 // //       </div>
 // //     </div>
-//     <Grid>d</Grid>
-    
-//   );
-// }
+
+
+import { useState } from "react";
+import { jsPDF } from "jspdf";
+
+// Define FoodItem, InventoryItem, ExpenseItem, and Report types
+interface FoodItem {
+  food: string;
+  quantity: number;
+  price: number;
+  totalPrice: number;
+}
+
+interface Report {
+  id: number;
+  foodItems: FoodItem[];
+  date: string;
+  time: string;
+}
+
+interface InventoryItem {
+  name: string;
+  quantity: number;
+  price: number;
+}
+
+interface ExpenseItem {
+  name: string;
+  amount: number;
+  date: string;
+}
+
+const ReportManagement = () => {
+  const [reports, setReports] = useState<Report[]>([]);
+  const [inventory, setInventory] = useState<InventoryItem[]>([]);
+  const [expenses, setExpenses] = useState<ExpenseItem[]>([]);
+  
+  const [isGeneratingOrderReport, setIsGeneratingOrderReport] = useState(false);
+  const [isGeneratingInventoryReport, setIsGeneratingInventoryReport] = useState(false);
+  const [isGeneratingExpenseReport, setIsGeneratingExpenseReport] = useState(false);
+
+  const [selectedOrderReport, setSelectedOrderReport] = useState<Report | null>(null);
+  const [selectedInventoryReport, setSelectedInventoryReport] = useState<InventoryItem | null>(null);
+  const [selectedExpenseReport, setSelectedExpenseReport] = useState<ExpenseItem | null>(null);
+
+  // Dummy Data for Orders, Inventory, and Expenses
+  const dummyFoodOrders = [
+    { food: "Pizza", quantity: 2, price: 1200, date: "2025-02-08", time: "12:30 PM" },
+    { food: "Burger", quantity: 3, price: 1950, date: "2025-02-08", time: "1:00 PM" },
+    { food: "Fish Burger", quantity: 3, price: 1800, date: "2025-02-08", time: "1:00 PM" },
+    { food: "Submarine", quantity: 2, price: 600, date: "2025-02-08", time: "1:00 PM" },
+    { food: "Grill Chicken", quantity: 3, price: 800, date: "2025-02-08", time: "1:00 PM" },
+    { food: "Fish Sub", quantity: 2, price: 880, date: "2025-02-08", time: "1:00 PM" },
+    { food: "Chicken Pizza", quantity: 3, price: 820, date: "2025-02-08", time: "1:00 PM" },
+    { food: "Burger", quantity: 3, price: 380, date: "2025-02-08", time: "1:00 PM" },
+    { food: "Pizza", quantity: 1, price: 500, date: "2025-02-08", time: "1:00 PM" },
+    { food: "Submarine", quantity: 2, price: 800, date: "2025-02-08", time: "1:00 PM" },
+    { food: "Burger", quantity: 1, price: 550, date: "2025-02-08", time: "1:00 PM" },
+    { food: "Pizza", quantity: 1, price: 480, date: "2025-02-08", time: "1:00 PM" },
+    { food: "Burger", quantity: 2, price: 950, date: "2025-02-08", time: "1:00 PM" },
+    { food: "Submarine", quantity: 1, price: 780, date: "2025-02-08", time: "1:00 PM" },
+    { food: "Burger", quantity: 2, price: 1200, date: "2025-02-08", time: "1:00 PM" },
+    { food: "Pizza", quantity: 1, price: 600, date: "2025-02-08", time: "1:00 PM" },
+    { food: "Hot Milo", quantity: 1, price: 380, date: "2025-02-08", time: "1:00 PM" },
+    { food: "Fruit Platter", quantity: 1, price: 340, date: "2025-02-08", time: "1:00 PM" },
+    { food: "Ice Cream", quantity: 1, price: 250, date: "2025-02-08", time: "1:00 PM" },
+  ];
+  
+  const dummyInventory = [
+    { name: "rice", quantity: 200, price: 20000  },
+    { name: "Cheese", quantity: 10, price: 12000 },
+    { name: "Cocunut Oil", quantity: 10, price: 12000 },
+    { name: "Cream", quantity: 10, price: 12000 },
+    { name: "Yogurt", quantity: 120, price: 12000 },
+    { name: "Meat", quantity: 210, price: 12000 },
+    { name: "Eggs", quantity: 101, price: 12000 },
+    { name: "Flour", quantity: 120, price: 12000 },
+    { name: "Bread", quantity: 120, price: 12000 },
+    { name: "Sugar", quantity: 40, price: 12000 },
+    { name: "Cooking Oil", quantity: 40, price: 12000 },
+    { name: "Sauces", quantity: 60, price: 12000 },
+    { name: "Soft", quantity: 100, price: 12000 },
+  ];
+  
+  const dummyExpenses = [
+    { name: "Rent", amount: 5000, date: "2025-FEB" },
+    { name: "Electricity", amount: 300, date: "2025-FEB" },
+    { name: "Elmpoyee Cost", amount: 300000, date: "2025-FEB" },
+    { name: "Transport Cost", amount: 300000, date: "2025-FEB" },
+  ];
+
+  // Generate Reports
+  const generateOrderReport = () => {
+    setIsGeneratingOrderReport(true);
+    setTimeout(() => {
+      const combinedReport = {
+        id: 1,
+        foodItems: dummyFoodOrders.map((order) => ({
+          food: order.food,
+          quantity: order.quantity,
+          price: order.price,
+          totalPrice: order.quantity * order.price,
+        })),
+        date: "2025-02-08",
+        time: "All Day",
+      };
+      setReports([combinedReport]);
+      setIsGeneratingOrderReport(false);
+    }, 2000);
+  };
+
+  const generateInventoryReport = () => {
+    setIsGeneratingInventoryReport(true);
+    setTimeout(() => {
+      setInventory(dummyInventory); // Generate Inventory Report
+      setIsGeneratingInventoryReport(false);
+    }, 2000);
+  };
+
+  const generateExpenseReport = () => {
+    setIsGeneratingExpenseReport(true);
+    setTimeout(() => {
+      setExpenses(dummyExpenses); // Generate Expense Report
+      setIsGeneratingExpenseReport(false);
+    }, 2000);
+  };
+
+  // Print Reports
+  const printOrderReport = () => {
+    if (selectedOrderReport) {
+      const doc = new jsPDF();
+      doc.text(`Order Report #${selectedOrderReport.id}`, 10, 10);
+      doc.text(`Date: ${selectedOrderReport.date}`, 10, 20);
+      doc.text(`Time: ${selectedOrderReport.time}`, 10, 30);
+
+      let yPosition = 40;
+      selectedOrderReport.foodItems.forEach((item) => {
+        doc.text(`Food: ${item.food}`, 10, yPosition);
+        doc.text(`Quantity: ${item.quantity}`, 10, yPosition + 10);
+        doc.text(`Price: $${item.price}`, 10, yPosition + 20);
+        doc.text(`Total Price: $${item.totalPrice}`, 10, yPosition + 30);
+        yPosition += 40;
+      });
+
+      doc.save(`order-report-${selectedOrderReport.id}.pdf`);
+    }
+  };
+
+  const printInventoryReport = () => {
+    if (selectedInventoryReport) {
+      const doc = new jsPDF();
+      doc.text(`Inventory Report for ${selectedInventoryReport.name}`, 10, 10);
+      doc.text(`Quantity: ${selectedInventoryReport.quantity}`, 10, 20);
+      doc.text(`Price: $${selectedInventoryReport.price}`, 10, 30);
+      doc.save(`inventory-report-${selectedInventoryReport.name}.pdf`);
+    }
+  };
+
+  const printExpenseReport = () => {
+    if (selectedExpenseReport) {
+      const doc = new jsPDF();
+      doc.text(`Expense Report for ${selectedExpenseReport.name}`, 10, 10);
+      doc.text(`Amount: $${selectedExpenseReport.amount}`, 10, 20);
+      doc.text(`Date: ${selectedExpenseReport.date}`, 10, 30);
+      doc.save(`expense-report-${selectedExpenseReport.name}.pdf`);
+    }
+  };
+
+  return (
+    <div className="container mx-auto p-4">
+      {/* Order Report Section */}
+      <div className="bg-white shadow-lg rounded-lg p-6 mb-4">
+        <h2 className="text-2xl font-bold mb-4">Order Report Management</h2>
+        <div className="flex space-x-4">
+          <button
+            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+            onClick={generateOrderReport}
+            disabled={isGeneratingOrderReport}
+          >
+            {isGeneratingOrderReport ? "Generating..." : "Generate Order Report"}
+          </button>
+        </div>
+        {reports.length > 0 && (
+          <div className="mt-6">
+            <table className="min-w-full table-auto">
+              <thead>
+                <tr>
+                  <th className="px-4 py-2 border">Food</th>
+                  <th className="px-4 py-2 border">Quantity</th>
+                  <th className="px-4 py-2 border">Price</th>
+                  <th className="px-4 py-2 border">Total Price</th>
+                  {/* <th className="px-4 py-2 border">Actions</th> */}
+                </tr>
+              </thead>
+              <tbody>
+                {reports[0].foodItems.map((item, index) => (
+                  <tr key={index}>
+                    <td className="px-4 py-2 border">{item.food}</td>
+                    <td className="px-4 py-2 border">{item.quantity}</td>
+                    <td className="px-4 py-2 border">{item.price}</td>
+                    <td className="px-4 py-2 border">{item.totalPrice}</td>
+                    {/* <td className="px-4 py-2 border">
+                      <button
+                        className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
+                        onClick={printOrderReport}
+                      >
+                        Print
+                      </button>
+                    </td> */}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </div>
+
+      {/* Inventory Report Section */}
+      <div className="bg-white shadow-lg rounded-lg p-6 mb-4">
+        <h2 className="text-2xl font-bold mb-4">Inventory Report Management</h2>
+        <div className="flex space-x-4">
+          <button
+            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+            onClick={generateInventoryReport}
+            disabled={isGeneratingInventoryReport}
+          >
+            {isGeneratingInventoryReport ? "Generating..." : "Generate Inventory Report"}
+          </button>
+        </div>
+        {inventory.length > 0 && (
+          <div className="mt-6">
+            <table className="min-w-full table-auto">
+              <thead>
+                <tr>
+                  <th className="px-4 py-2 border">Item Name</th>
+                  <th className="px-4 py-2 border">Quantity</th>
+                  <th className="px-4 py-2 border">Price</th>
+                  {/* <th className="px-4 py-2 border">Actions</th> */}
+                </tr>
+              </thead>
+              <tbody>
+                {inventory.map((item, index) => (
+                  <tr key={index}>
+                    <td className="px-4 py-2 border">{item.name}</td>
+                    <td className="px-4 py-2 border">{item.quantity}</td>
+                    <td className="px-4 py-2 border">{item.price}</td>
+                    {/* <td className="px-4 py-2 border">
+                      <button
+                        className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
+                        onClick={printInventoryReport}
+                      >
+                        Print
+                      </button>
+                    </td> */}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </div>
+
+      {/* Expense Report Section */}
+      <div className="bg-white shadow-lg rounded-lg p-6 mb-4">
+        <h2 className="text-2xl font-bold mb-4">Expense Report Management</h2>
+        <div className="flex space-x-4">
+          <button
+            className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+            onClick={generateExpenseReport}
+            disabled={isGeneratingExpenseReport}
+          >
+            {isGeneratingExpenseReport ? "Generating..." : "Generate Expense Report"}
+          </button>
+        </div>
+        {expenses.length > 0 && (
+          <div className="mt-6">
+            <table className="min-w-full table-auto">
+              <thead>
+                <tr>
+                  <th className="px-4 py-2 border">Expense Name</th>
+                  <th className="px-4 py-2 border">Amount</th>
+                  <th className="px-4 py-2 border">Date</th>
+                  {/* <th className="px-4 py-2 border">Actions</th> */}
+                </tr>
+              </thead>
+              <tbody>
+                {expenses.map((item, index) => (
+                  <tr key={index}>
+                    <td className="px-4 py-2 border">{item.name}</td>
+                    <td className="px-4 py-2 border">{item.amount}</td>
+                    <td className="px-4 py-2 border">{item.date}</td>
+                    {/* <td className="px-4 py-2 border">
+                      <button
+                        className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
+                        onClick={printExpenseReport}
+                      >
+                        Print
+                      </button>
+                    </td> */}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+};
+
+export default ReportManagement;
+
+
+
+
+
+
