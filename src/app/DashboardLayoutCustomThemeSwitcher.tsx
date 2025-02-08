@@ -28,6 +28,7 @@ import Avatar from '@mui/material/Avatar';
 import Divider from '@mui/material/Divider';
 import PlaceOrderPage from "@/app/place-order/page";
 import DashboardPage from './dashboard/page';
+import OrderReportManagement from './orderReport/page';
 // import OrderReportManager from './orderReport/page';
 
 
@@ -84,7 +85,7 @@ function DemoPageContent({ pathname }: { pathname: string }) {
         >   
             {pathname === '/dashboard' && <DashboardPage />}
             {pathname === '/orders' &&  <PlaceOrderPage/>}
-            {/* {pathname === '/orderReport' &&  <OrderReportManager/>}  */}
+            {pathname === '/orderReport' &&  <OrderReportManagement/>} 
 
         </Box>
     );
