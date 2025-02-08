@@ -132,8 +132,8 @@ const DashboardPage: React.FC = () => {
     ],
     slotProps: { legend: { hidden: true } },
     dataset,
-    width: 600,
-    height: 400,
+    width: 650,
+    height: 300,
     sx: {
       [`.${axisClasses.left} .${axisClasses.label}`]: {
         transform: 'translate(-10px, 0)',
@@ -326,8 +326,8 @@ const DashboardPage: React.FC = () => {
         label: 'Total Orders',
       },
     ],
-    width: 600,
-    height: 400,
+    width: 650,
+    height: 300,
     sx: {
       [`.${axisClasses.left} .${axisClasses.label}`]: {
         transform: 'translate(-10px, 0)',
@@ -559,12 +559,12 @@ const DashboardPage: React.FC = () => {
       </Box>
       <Box>
         <Grid>
-        <Grid  sx={{ backgroundColor: '#f0f0f0' ,borderRadius:10, padding:1 ,left:-350,position:'relative',top:-30}}>
+        <Grid  sx={{ backgroundColor: '#f0f0f0' ,borderRadius:10, padding:1 ,left:100,position:'absolute',top:285 }}>
            
           <Typography sx={{color: '#00072D', margin: '40px 0', fontWeight: 'bold',fontSize:'1.3rem' }}>
             Total Orders Per week
           </Typography>
-        <BarChart
+        <BarChart 
           dataset={datasets}
           xAxis={[{ scaleType: 'band', dataKey: 'month' }]}
          series={[
@@ -578,7 +578,7 @@ const DashboardPage: React.FC = () => {
         </Grid>
         
           
-          <Grid sx={{ backgroundColor: '#f0f0f0' ,borderRadius:10, padding:1 ,left:350,position:'relative', top:-560}}>
+          <Grid sx={{ backgroundColor: '#f0f0f0' ,borderRadius:10, padding:1 ,left:800,position:'absolute', top:290}}>
           <Typography sx={{color: '#00072D', margin: '40px 0', fontWeight: 'bold',fontSize:'1.3rem' }}>
             Total Orders Per Day
           </Typography>
