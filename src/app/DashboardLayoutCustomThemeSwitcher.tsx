@@ -84,7 +84,7 @@ function DemoPageContent({ pathname }: { pathname: string }) {
         >   
             {pathname === '/dashboard' && <DashboardPage />}
             {pathname === '/orders' &&  <PlaceOrderPage/>}
-            {pathname === '/orderReport' &&  <OrderReportManager/>} 
+            {/* {pathname === '/orderReport' &&  <OrderReportManager/>}  */}
 
         </Box>
     );
