@@ -1,7 +1,7 @@
 import { Product } from "@/service/product";
 
 export interface OrderReport {
-  id: string;
+  _id: string;
   totalOrder: number;
   totalRevenue: number;
   items: {

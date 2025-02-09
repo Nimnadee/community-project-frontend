@@ -28,7 +28,8 @@ import Avatar from '@mui/material/Avatar';
 import Divider from '@mui/material/Divider';
 import PlaceOrderPage from "@/app/place-order/page";
 import DashboardPage from './dashboard/page';
-import OrderReportManagement from './orderReport/page';
+import OrderReports from './generateReports/page';
+
 // import OrderReportManager from './orderReport/page';
 
 
@@ -49,7 +50,7 @@ const NAVIGATION: Navigation = [
         icon: <ShoppingCartIcon />,
     },
     {
-        segment: 'orderReport',
+        segment: 'generateReports',
         title: 'Reports',
         icon: <BarChartIcon />,
     },
@@ -85,7 +86,7 @@ function DemoPageContent({ pathname }: { pathname: string }) {
         >   
             {pathname === '/dashboard' && <DashboardPage />}
             {pathname === '/orders' &&  <PlaceOrderPage/>}
-            {pathname === '/orderReport' &&  <OrderReportManagement/>} 
+             {pathname === '/generateReports' &&  <OrderReports/>} 
 
         </Box>
     );
